@@ -1,0 +1,18 @@
+//fonts mixin
+@mixin gagalin() {
+    font-family: gagalin, Helvetica, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+@mixin lifehack() {
+    font-family: lifehack, Helvetica, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+@mixin ubuntu() {
+    font-family: ubuntu, Helvetica, sans-serif;
+    font-style: normal;
+}

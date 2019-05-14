@@ -1,0 +1,23 @@
+.features__desc {
+    text-align: center;
+  }
+  
+  .features__pic {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+  }
+  
+  .features__title {
+    @include lifehack();
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  
+  .features__text {
+    @include ubuntu()
+    font-weight: 300;
+    font-size: 14px;
+  }
+  

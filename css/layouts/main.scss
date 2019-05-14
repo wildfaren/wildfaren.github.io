@@ -1,0 +1,25 @@
+.main {
+    background: url('../../img/background/main.jpg') center center / cover no-repeat; 
+    position: relative;
+  }
+  .main__container {
+    justify-content: flex-start;
+  }
+  
+  .main__content {
+    flex: .9;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+  }
+
+  .main__content-text {
+    padding-top: 60px;
+  }
+  
+  .main__desc {
+    font-size: 65px;
+    @include lifehack();
+    line-height: 1;
+    color: #fff;
+  }
