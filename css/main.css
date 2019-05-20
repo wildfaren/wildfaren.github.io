@@ -825,6 +825,12 @@ footer {
     color: #f9b43b; }
   .menu-accordeon__item.active .menu-accordeon__desc {
     width: 34.375rem; }
+    @media screen and (max-width: 768px) {
+      .menu-accordeon__item.active .menu-accordeon__desc {
+        width: 36.125rem; } }
+    @media screen and (max-width: 480px) {
+      .menu-accordeon__item.active .menu-accordeon__desc {
+        width: 17.375rem; } }
   .menu-accordeon__item.active .menu-accordeon__text {
     display: block; }
 
