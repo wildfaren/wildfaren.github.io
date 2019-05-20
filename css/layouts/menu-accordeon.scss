@@ -19,11 +19,11 @@
             width: rem(550px);
 
             @include tablets {
-              width: rem(578px);
+              width: rem(550px);
             }
 
             @include phones {
-              width: rem(278px);
+              width: rem(215px);
             }
         }
 
