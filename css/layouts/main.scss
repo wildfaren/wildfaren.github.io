@@ -1,25 +1,69 @@
 .main {
     background: url('../../img/background/main.jpg') center center / cover no-repeat; 
     position: relative;
+}
+.main__container {
+  justify-content: flex-start;
+}
+
+.main__content {
+  flex: .9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: rem(20px);
+
+  @include tablets {
+    flex-direction: column;
+    padding: 0 10%;
   }
-  .main__container {
-    justify-content: flex-start;
+}
+
+.main__content-text {
+  padding-top: rem(60px);
+
+  @include tablets {
+    padding: rem(30px) 20% 0;
+    text-align: center;
   }
-  
-  .main__content {
-    flex: .9;
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
+  @include phones {
+    padding: 0 3%;
+  }
+}
+
+.main__img {
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 100%;
+  max-height: 100%;
+
+    @include tablets {
+      max-width: 80%;
+    }
+
+    @include phones {
+      height: rem(200px);
+    }
   }
 
-  .main__content-text {
-    padding-top: 60px;
+.main__content-text,
+.main__content-image {
+  width: 50%;
+
+  @include tablets {
+    width: 100%;
   }
-  
-  .main__desc {
-    font-size: 65px;
-    @include lifehack();
-    line-height: 1;
-    color: #fff;
+}
+
+.main__desc {
+  font-size: rem(65px);
+  @include lifehack();
+  line-height: 1;
+  color: #fff;
+
+  @include phones {
+    font-size: rem(45px);
   }
+}

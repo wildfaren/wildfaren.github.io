@@ -1,10 +1,22 @@
+.reviews {
+  background: #000;
+  @include tablets {
+    min-height: rem(0px);
+  }
+}
+
 .reviews__list {
     height: 100%;
     display: flex;
     flex-wrap: wrap;
+}
+
+.reviews__item {
+  width: 25%;
+  height: 50%;
+
+  @include tablets {
+    height: 25%;
+    width: 50%;
   }
-  
-  .reviews__item {
-    width: 25%;
-    height: 50%;
-  }
+}

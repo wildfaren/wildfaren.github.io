@@ -1,0 +1,46 @@
+.footer {
+	background: url("../../img/background/footer.png") center bottom no-repeat;
+	background-size: cover;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  padding: rem(10px) 0;
+}
+
+.footer__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+	@include phones{
+		flex-direction: column;
+		text-align: center;
+	}
+}
+
+.footer__col {
+	width: 50%;
+	@include phones{
+		width:100%;
+	}
+}
+.footer__address {
+	color: #ffffff;
+	font-size: rem(14px);
+}
+
+.footer__phone {
+	color: $red;
+  @include ubuntu;
+  font-weight: bold;
+	text-decoration: none;
+	font-size: rem(14px);
+}
+
+.footer__socials {
+  text-align: right;
+  margin-bottom: 0;
+	@include phones{
+		text-align: center;
+	}
+}

@@ -11,15 +11,23 @@
 
   .review__title {
     @include gagalin();
-    font-size: 14px;
-    margin-bottom: 30px;
+    font-size: rem(14px);
+    margin-bottom: rem(30px);
+
+    @include phones {
+      font-size: rem(20px);
+    }
   }
 
   .review__text {
     @include ubuntu();
-    font-size: 14px;
+    font-size: rem(14px);
     font-weight: 300;
-    margin-bottom: 20px;
+    margin-bottom: rem(20px);
+
+    @include phones {
+      display: none;
+    }
   }
   
   .review__avatar {
@@ -35,8 +43,36 @@
     right: 0;
     bottom: 0;
     background: rgba(#000, .8);
-    padding: 45px 5% 10px;
+    padding: rem(45px) 5% rem(10px);
     color: #fff;
     opacity: 0;
     transition: opacity .3s;
+
+    @include tablets {
+      padding: 0 15%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
   }
+
+.review__button {
+  border-radius: rem(5px);
+  background-color: rgb(47, 50, 52);
+  padding: rem(8px) rem(12px);
+  display: inline-block;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  @include ubuntu;
+  font-weight: 500;
+  font-size: rem(12px);
+  transition: .3s;
+  border:1px solid transparent;
+  outline: none;
+  &:hover {
+    background-color: rgb(31, 33, 34);
+
+  }
+}

@@ -4,6 +4,13 @@ $yellow: #f9b43b;
 $black: #2f3234;
 $red: #e35028;
 
+//breakpoints
+$tablets: 768px;
+$phones: 480px;
+
+//media
+@import "_misc/media.scss";
+
 //normalize
 @import "_misc/normalize.scss";
 
@@ -13,14 +20,24 @@ $red: #e35028;
 @import "_misc/layout.scss";
 
 //layouts
+@import "layouts/nav.scss";
 @import "layouts/main.scss";
 @import "layouts/best.scss";
 @import "layouts/features.scss";
+@import "layouts/team.scss";
+@import "layouts/team-accordeon.scss";
+@import "layouts/menu.scss";
+@import "layouts/menu-accordeon.scss";
+@import "layouts/form.scss";
 @import "layouts/reviews.scss";
 @import "layouts/review.scss";
+@import "layouts/map.scss";
+@import "layouts/footer.scss";
+@import "layouts/social.scss";
 @import "layouts/header.scss";
-@import "layouts/menu.scss";
 @import "layouts/btn.scss";
 @import "layouts/section-title.scss";
 @import "layouts/down-arrow.scss";
+@import "layouts/hamburger-menu.scss";
+@import "layouts/hamburger-menu-link.scss";
 @import "layouts/scroll.scss";

@@ -1,13 +1,16 @@
 .scroll__list{
     position: fixed;
-    top: 100px;
-    right: 40px;
+    top: rem(100px);
+    right: rem(40px);
     
+    @include tablets {
+      display: none;
+    }
   }
   
   .scroll__link {
-    width: 16px;
-    height: 16px;
+    width: rem(16px);
+    height: rem(16px);
     display: block;
     position: relative;
   
@@ -22,14 +25,14 @@
     }
   
     &:after {
-      width: 6px;
-      height: 6px;
+      width: rem(6px);
+      height: rem(6px);
       background: #fff;
     }
   
     &:before {
-      width: 0px;
-      height: 0px;
+      width: rem(0px);
+      height: rem(0px);
       border-radius: 50%;
       border: 1px solid #fff;
       opacity: 0;
@@ -38,8 +41,8 @@
   
     &:hover {
       &:before {
-        width: 14px;
-        height: 14px;
+        width: rem(14px);
+        height: rem(14px);
         opacity: 1;
       }
     }
@@ -49,8 +52,8 @@
     &.active {
       .scroll__link {
         &:before {
-          width: 14px;
-          height: 14px;
+          width: rem(14px);
+          height: rem(14px);
           opacity: 1;
         }
       }
@@ -58,5 +61,5 @@
   }
   
   .scroll__item {
-    margin-bottom: 5px;
+    margin-bottom: rem(5px);
   }

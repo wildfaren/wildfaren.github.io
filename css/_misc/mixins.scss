@@ -16,3 +16,27 @@
     font-family: ubuntu, Helvetica, sans-serif;
     font-style: normal;
 }
+
+
+@mixin cover(){
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+@mixin inlineblock ($valine: top) {
+	display: inline-block;
+	vertical-align: $valine;
+}
+
+%clearfix {
+	&:before,
+	&:after {
+		content: "";
+		display: block;
+	}
+
+	&:after {
+		clear: both;
+	}
+}

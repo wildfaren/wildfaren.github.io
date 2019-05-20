@@ -1,12 +1,21 @@
-.section-title {
-    font-size: 72px;
-    @include gagalin();
-    margin-bottom: 35px;
+.section__title {
+    font-size: rem(72px);
+    @include gagalin;
+    margin-bottom: rem(45px);
     line-height: 1;
     color: $yellow;
+
+    @include phones {
+      font-size: rem(54px);
+      margin-bottom: rem(25px);
+    }
   
     &--color-black {
       color: $black;
+    }
+
+    &--color-white {
+      color: #fff;
     }
   
     &--centered {
