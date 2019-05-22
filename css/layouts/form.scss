@@ -35,6 +35,10 @@
   .form__row{
     display:flex;
     margin-bottom:rem(20px);
+
+    @include phones {
+      margin-bottom: .85rem;
+    }
   }
   .form__buttons{
     @include phones {
