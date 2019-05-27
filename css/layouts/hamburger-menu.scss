@@ -1,37 +1,21 @@
-.hamburger-menu {
-    position: absolute;
-    left: -99999px;
+.hamburger__menu {
+  position: fixed;
+  left: -999999px;
+  right: 0;
+  background: rgba(#2f3234, .95);
+  align-items: center;
+  justify-content: center;
+  display: none;
+  z-index: 10;
+  transition: opacity .3s;
+  
+  &.active{
+    display: flex;
+    left: 0;
     right: 0;
-    background: rgba(#2f3234, .95);
-    align-items: center;
-    justify-content: center;
-    display: none;
-    z-index: 10;
-    transition: opacity .3s;
-    &.is-active{
-      display: flex;
-      opacity:1;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      top: 0;
-      z-index: 1;
-    }
+    bottom: 0;
+    top: 0;
+    z-index: 5;
+    transition: .3s;
   }
-  
-  @keyframes slideInUp {
-    from {
-      transform: translate3d(0, 100%, 0);
-      visibility: visible;
-      opacity: 0;
-    }
-  
-    to {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
-    }
-  }
-  
-  .slideInUp, .slideInUp:after{
-    animation: slideInUp .3s;
-  }
+}

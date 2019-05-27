@@ -1,0 +1,82 @@
+.ingredients {
+    position: absolute;
+    width: rem(90px);
+    height: rem(90px);
+    background: rgba($orange, .4);
+    border-radius: rem(5px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: .3s;
+
+    &:hover {
+        background: $red;
+    }
+
+    @include tablets {
+        top: 0;
+        left: rem(140px);
+    }
+
+    @include phones {
+        left: 0;
+    }
+}
+
+.ingredients__icon {
+    height: 50%;
+}
+
+.ingredients__icon-text {
+    @include gagalin;
+    font-size: rem(14px);
+    color: #fff;
+    text-align: center;
+}
+
+.weight {
+    position: absolute;
+    width: rem(90px);
+    height: rem(110px);
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    opacity: .5;
+
+    @include tablets {
+        top: rem(-10px);
+        right: rem(140px);
+        bottom: auto;
+        left: auto;
+    }
+
+    @include phones {
+        right: 0;
+    }
+}
+
+.weight__icon {
+    height: 55%;
+}
+
+.weight__amount {
+    position: absolute;
+    @include gagalin;
+    font-size: rem(20px);
+    color: #fff;
+    text-align: center;
+    bottom: 2.6rem;
+}
+
+.weight__title {
+    @include gagalin;
+    font-size: rem(14px);
+    color: #fff;
+    text-align: center;
+}
