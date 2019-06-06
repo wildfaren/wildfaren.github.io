@@ -11,8 +11,20 @@
     z-index: 10;
     transition: .3s;
 
-    &:hover {
+    // &:hover {
+    //     background: $red;
+    // }
+
+    &.ingredients--active {
         background: $red;
+        .ingredients__dropdown {
+            left: 100%;
+            opacity: 1;
+            @include phones {
+                left: rem(90px);
+                right: 0;
+            }
+        }
     }
 
     @include tablets {
@@ -46,7 +58,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 10;
+    z-index: 7;
     opacity: .5;
 
     @include tablets {
@@ -79,4 +91,80 @@
     font-size: rem(14px);
     color: #fff;
     text-align: center;
+}
+
+.ingredients__dropdown {
+    padding: rem(20px);
+    background: rgba(#fff, .9);
+    position: absolute;
+    width: rem(270px);
+    border-radius: rem(7px);
+    left: -9999px;
+    opacity: 0;
+    transition: opacity .3s;
+    z-index: 10;
+    top: 0;
+
+    @include tablets {
+        width: 20rem;
+    }
+
+    @include phones {
+        width: 19.575rem;
+    }
+}
+
+.ingredients {
+    &__list {
+        width: 100%;
+
+        @include tablets {
+            width: 80%;
+        }
+    }
+
+    &__row {
+        display: flex;
+        align-items: center;
+        margin-bottom: rem(15px);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__cell {
+        padding-left: rem(20px);
+
+        &:last-child {
+            margin-left: auto;
+        }
+
+        &:first-child {
+            padding-left: 0px;
+        }
+    }
+
+    &__text {
+        @include ubuntu;
+        font-weight: 500;
+    }
+
+    &__icon-drop {
+        max-width: 100%;
+    }
+}
+
+.ingredients__close {
+    display: none;
+
+    @include tablets {
+        display: block;
+        position: absolute;
+        text-align: center;
+        width: rem(25px);
+        height: rem(25px);
+        top: rem(20px);
+        left: rem(280px);
+    }
 }
