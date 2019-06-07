@@ -15,7 +15,10 @@ let menu = (function(options) {
             e.preventDefault();
             _toggleMenu();
         });
-        buttonClose.addEventListener('click', _toggleMenu);
+        buttonClose.addEventListener('click', function(e){
+            e.preventDefault();
+            _toggleMenu();
+        });
 
         menu.addEventListener('click', function(e) {
             
