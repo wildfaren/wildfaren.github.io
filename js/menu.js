@@ -11,11 +11,14 @@ let menu = (function(options) {
     }
 
     let addListeners = function() {
-        buttonOpen.addEventListener('click', _toggleMenu);
-
+        buttonOpen.addEventListener('click', function(e){
+            e.preventDefault();
+            _toggleMenu();
+        });
         buttonClose.addEventListener('click', _toggleMenu);
 
         menu.addEventListener('click', function(e) {
+            
             target = e.target;
             if (target.classList == 'nav__link') {
                 _toggleMenu();
@@ -110,25 +113,29 @@ menuAccoJS();
 
 // Dropdown menu
 
-let ingredients = document.querySelector(".ingredients");
-let buttonClose = document.querySelector(".ingredients__close")
-
-ingredients.addEventListener('mouseenter', function(){
-    ingredients.classList.add('ingredients--active');
-});
-
-ingredients.addEventListener('mouseleave', function(){
-    ingredients.classList.remove('ingredients--active');
-});
-
-buttonClose.addEventListener('click', function(e){
-    e.preventDefault();
-    ingredients.classList.remove('ingredients--active');
-});
+let ingredients = document.querySelectorAll(".ingredients");
+let buttonClose = document.querySelector(".ingredients__close");
 
 
+for (let i = 0; i < ingredients.length; i++) {
+    let drop = ingredients[i];
+    drop.addEventListener('mouseenter', function(e){
+        e.preventDefault();
+        // console.log('mouseenter');
+        drop.classList.add('ingredients--active');
+    })
 
+    drop.addEventListener('mouseleave', function(e){
+        e.preventDefault();
+        drop.classList.remove('ingredients--active');
+    })
 
+};
+
+// buttonClose.addEventListener('click', function(e){
+//     e.preventDefault();
+//     ingredients.classList.remove('ingredients--active');
+// })
 
 
 // Slider
@@ -153,7 +160,7 @@ const slide = (function() {
     let moveSlide = function(direction) {
         direction.addEventListener("click", function(e){
             e.preventDefault();
-            console.log(direction);
+            // console.log(direction);
             let currentRight = parseInt(computed.right);
 
             if(currentRight < (sliderItemsCounter-1)*sliderWidth && direction==right) {
