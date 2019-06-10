@@ -1,0 +1,60 @@
+//fonts mixin
+@mixin gagalin() {
+    font-family: gagalin, Helvetica, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+@mixin lifehack() {
+    font-family: lifehack, Helvetica, sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+@mixin ubuntu() {
+    font-family: ubuntu, Helvetica, sans-serif;
+    font-style: normal;
+}
+
+
+@mixin cover(){
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+@mixin inlineblock ($valine: top) {
+	display: inline-block;
+	vertical-align: $valine;
+}
+
+%clearfix {
+	&:before,
+	&:after {
+		content: "";
+		display: block;
+	}
+
+	&:after {
+		clear: both;
+	}
+}
+
+// Mobile
+
+@function rem($px) {
+    @return $px / 16px + 0rem;
+}
+
+@mixin tablets {
+    @media screen and (max-width: $tablets) {
+        @content;
+    }
+}
+
+@mixin phones {
+    @media screen and (max-width: $phones) {
+        @content;
+    }
+}
