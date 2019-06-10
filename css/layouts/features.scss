@@ -1,45 +1,43 @@
 .features__desc {
-    text-align: center;
+  text-align: center;
 
-    @include phones {
-      text-align: left;
-      display: block;
-      width: 65%;
-    }
+  @include phones {
+    text-align: left;
+    display: block;
+    width: 65%;
   }
+}
   
-  .features__pic {
-    display: flex;
-    margin-bottom: rem(10px);
-    justify-content: center;
-    
-    @include phones {
-      margin-right: rem(20px);
-      width: 30%;
-    }
+.features__pic {
+  display: flex;
+  margin-bottom: rem(10px);
+  justify-content: center;
+  
+  @include phones {
+    margin-right: rem(20px);
+    width: 30%;
+  }
+}
+
+.features__img {
+  width: 90%;
+  height: rem(85px);
+
+  svg {
+    max-width: 90%;
   }
 
-  .features__img {
-    width: 90%;
-    height: rem(85px);
+}
 
-    svg {
-      max-width: 90%;
-    }
+.features__title {
+  @include lifehack();
+  font-size: rem(24px);
+  font-weight: 500;
+  margin-bottom: rem(10px);
+}
 
-  }
-  
-  .features__title {
-    @include lifehack();
-    font-size: rem(24px);
-    font-weight: 500;
-    margin-bottom: rem(10px);
-  }
-  
-  .features__text {
-    @include ubuntu()
-    font-weight: 300;
-    font-size: rem(14px);
-    
-  }
-  
+.features__text {
+  @include ubuntu()
+  font-weight: 300;
+  font-size: rem(14px);
+}

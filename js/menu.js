@@ -115,9 +115,26 @@ menuAccoJS();
 
 
 // Dropdown menu
+// let container = document.querySelector('.burgers__list');
+// let ingredients = document.querySelector('.ingredients');
 
+// container.addEventListener('mouseover', function(e){ 
+//     var target = e.target;
+//     console.log(target.className);
+//     if(target.className == 'ingredients') {
+//         ingredients.classList.add('ingredients--active');
+//     }
+// });
+
+// container.addEventListener('mouseout', function(){
+//     ingredients.classList.remove('ingredients--active');
+// })
+
+
+
+let block = document.querySelector('.burgers__list');
 let ingredients = document.querySelectorAll(".ingredients");
-let buttonClose = document.querySelector(".ingredients__close");
+let buttonClose = document.querySelectorAll(".ingredients__close");
 
 
 for (let i = 0; i < ingredients.length; i++) {
@@ -126,67 +143,61 @@ for (let i = 0; i < ingredients.length; i++) {
         e.preventDefault();
         // console.log('mouseenter');
         drop.classList.add('ingredients--active');
-    })
+    });
 
     drop.addEventListener('mouseleave', function(e){
         e.preventDefault();
         drop.classList.remove('ingredients--active');
-    })
-
+    });
 };
-
-// buttonClose.addEventListener('click', function(e){
-//     e.preventDefault();
-//     ingredients.classList.remove('ingredients--active');
-// })
 
 
 // Slider
 
-const slide = (function() {
-    const left = document.querySelector('.arrow__btn-prev');
-    const right = document.querySelector('.arrow__btn-next');
-    const slider = document.querySelector('.burgers__list');
-    const computed = getComputedStyle(slider);
-// console.dir(computed);
-    let sliderWidth = parseInt(computed.width);
+$(function () {
 
-    window.addEventListener('resize', function(){
-        currentRight = 0;
-        slider.style.right = currentRight;
-        sliderWidth = parseInt(computed.width);
-    }, true);
+    var moveSlide = function (container, slideNum) {
+        var items = container.find('.burgers__item'),
+        activeSlide = items.filter('.active'),
+        reqItem = items.eq(slideNum),
+        reqIndex = reqItem.index(),
+        list = container.find('.burgers__list'),
+        duration = 500;
 
-    var sliderItemsCounter = slider.children.length;
-    // console.log(sliderItemsCounter);
-
-    let moveSlide = function(direction) {
-        direction.addEventListener("click", function(e){
-            e.preventDefault();
-            // console.log(direction);
-            let currentRight = parseInt(computed.right);
-
-            if(currentRight < (sliderItemsCounter-1)*sliderWidth && direction==right) {
-                slider.style.right = currentRight + sliderWidth + "px";
-            }
-
-            if(currentRight > 0 && direction==left) {
-                slider.style.right = currentRight - sliderWidth + "px";
-            }
-
-        });
+        if (reqItem.length) {
+            list.animate({
+                'left' : -reqIndex * 100 + '%'
+            }, duration, function () {
+                activeSlide.removeClass('active');
+                reqItem.addClass('active');
+            });
+        }
     }
 
-    let addListeners = function() {
-        moveSlide(right);
-        moveSlide(left);
-    }
+    $('.arrow__btn').on('click', function(e){
+        e.preventDefault();
 
-    return {init: addListeners}
-})();
+        var $this = $(this),
+        container = $this.closest('.burgers__wrap'),
+        items = $('.burgers__item', container),
+        activeItem = items.filter('.active'),
+        existedItem, edgeItem, reqItem;
 
-slide.init();
+        if($this.hasClass('arrow__btn-next')) {
+            existedItem = activeItem.next();
+            edgeItem = items.first();
+        } 
 
+        if($this.hasClass('arrow__btn-prev')) {
+            existedItem = activeItem.prev();
+            edgeItem = items.last();
+        } 
+
+        reqItem = existedItem.length ? existedItem.index() : edgeItem.index();
+
+        moveSlide(container, reqItem);
+    });
+})
 
 // Modal windows and AJAX
 
@@ -303,3 +314,263 @@ let reviewOpen = function(content) {
 }
 content = document.querySelector('#overlay-win').innerHTML;
 reviewOpen(content);
+
+
+// OPS
+
+const sections = $('.section');
+const display = $('.maincontent');
+let inscroll = false;
+
+const md = new MobileDetect(window.navigator.userAgent);
+const isMobile = md.mobile();
+
+const switchActiveScroll = menuItemIndex => {
+    $('.scroll__item')
+    .eq(menuItemIndex)
+    .addClass('active')
+    .siblings()
+    .removeClass('active');
+};
+
+const performTransition = sectionEq => {
+    if(inscroll) return;
+
+    const transitionDuration = 1000;
+    const endOfInertion = 300;
+
+    inscroll = true;
+    const position = `${sectionEq * -100}%`;
+    
+    sections
+        .eq(sectionEq)
+        .addClass('active')
+        .siblings()
+        .removeClass('active');
+
+    display.css({
+        transform: `translateY(${position})`
+    });
+
+    setTimeout(() => {
+        inscroll = false
+    }, transitionDuration + endOfInertion);
+    
+    setTimeout(() => {
+        switchActiveScroll(sectionEq);
+    }, 300);
+};
+
+const scrollToSestion = direction => {
+    const activeSection = sections.filter('.active');
+    const nextSection = activeSection.next();
+    const prevSection = activeSection.prev();
+
+    if(direction === "next" && nextSection.length) {
+        performTransition(nextSection.index());
+    }
+
+    if(direction === "prev" && prevSection.length) {
+        performTransition(prevSection.index());
+    }
+}
+
+$('.wrapper').on({
+    wheel: e => {
+    const deltaY = e.originalEvent.deltaY;
+    const direction = deltaY > 0 ? "next" : "prev";
+
+    scrollToSestion(direction);
+    },
+
+    touchmove: e => e.preventDefault()
+
+});
+
+$(document).on('keydown', e => {
+    switch (e.keyCode) {
+        case 38:
+            scrollToSestion("prev");
+            break;
+        case 40:
+            scrollToSestion("next");
+            break;
+    }
+});
+
+$('[data-scroll-to]').on('click', e => {
+    e.preventDefault();
+    const target = $(e.currentTarget).attr('data-scroll-to');
+
+    performTransition(target);
+});
+
+// Touch 
+
+
+
+if(isMobile) {
+    $(window).swipe({
+        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+          const nextOrPrev = direction === "up" ? "next" : "prev"; 
+    
+          scrollToSestion(nextOrPrev);
+        }
+    });
+}
+
+
+// Player 
+
+let video;
+let durationControl; 
+let soundControl;
+let intervalId;
+
+$().ready(function(){
+
+    video = document.getElementById("player"); 
+
+    video.addEventListener('click', playStop);
+
+    let playButtons = document.querySelectorAll(".play");
+    for (let i = 0; i < playButtons.length;i++){
+        playButtons[i].addEventListener('click',playStop);
+    }
+
+    let micControl = document.getElementById("mic");
+    micControl.addEventListener('click',soundOf)
+    
+    durationControl = document.getElementById("durationLevel");  
+    durationControl.addEventListener('mousedown', stopInterval);   
+    // durationControl.addEventListener('click',setVideoDuration);
+    durationControl.addEventListener('mouseup', setVideoDuration); 
+
+    durationControl.min = 0;
+    durationControl.value = 0;    
+
+    soundControl = document.getElementById("micLevel");    
+    // soundControl.addEventListener('click', changeSoundVolume);
+    soundControl.addEventListener('mouseup', changeSoundVolume); 
+
+    soundControl.min = 0;
+    soundControl.max = 10;
+    soundControl.value = soundControl.max;
+
+    video.addEventListener('ended', function () {
+        $(".video__player-img").toggleClass("video__player-img--active");
+        video.currentTime = 0;
+    }, false);
+});
+
+
+function playStop(){
+    $(".video__player-img").toggleClass("video__player-img--active");  
+    durationControl.max = video.duration;
+
+    if (video.paused){
+        video.play();
+        intervalId = setInterval(updateDuration,1000/66)
+        
+    }else{
+        video.pause();  
+        clearInterval(intervalId);
+        
+    }
+}
+
+function stopInterval(){
+    video.pause();
+    clearInterval(intervalId);
+}
+
+
+function setVideoDuration(){
+    if (video.paused){
+        video.play();
+    }else{
+        video.pause();  
+    }
+    video.currentTime = durationControl.value;
+    intervalId = setInterval(updateDuration,1000/66);
+}
+
+
+function updateDuration(){    
+    durationControl.value = video.currentTime;
+}
+
+
+function soundOf(){    
+    if (video.volume === 0){
+        video.volume = soundLevel;
+        soundControl.value = soundLevel*10;
+    }else{
+        soundLevel = video.volume;
+        video.volume = 0;
+        soundControl.value = 0;
+    }    
+}
+
+function changeSoundVolume(){
+    video.volume = soundControl.value/10; 
+    console.log(video.volume) 
+}
+
+
+// Map 
+
+ymaps.ready(function init(){ 
+  var myMap = new ymaps.Map("map", {
+      center: [59.938480, 30.312480],
+      zoom: 12
+    }, {
+      searchControlProvider: 'yandex#search'
+    }),
+
+    burger1 = new ymaps.Placemark([59.938480, 30.312480], {
+      hintContent: 'Магазин бургеров №1',
+      balloonContent: 'Бургерная 1'
+    }, {
+      iconLayout: 'default#image',
+      iconImageHref: 'img/icons/map-marker.svg',
+      iconImageSize: [40, 52],
+      iconImageOffset: [-5, -38]
+    }),
+
+    burger2 = new ymaps.Placemark([59.90, 30.36], {
+      hintContent: 'Магазин бургеров №2',
+      balloonContent: 'Бургерная 2'
+    }, {
+      iconLayout: 'default#image',
+      iconImageHref: 'img/icons/map-marker.svg',
+      iconImageSize: [40, 52],
+      iconImageOffset: [-5, -38]
+    }),
+
+    burger3 = new ymaps.Placemark([59.96, 30.32], {
+      hintContent: 'Магазин бургеров №3',
+      balloonContent: 'Бургерная 3'
+    }, {
+      iconLayout: 'default#image',
+      iconImageHref: 'img/icons/map-marker.svg',
+      iconImageSize: [40, 52],
+      iconImageOffset: [-5, -38]
+    }),
+
+    burger4 = new ymaps.Placemark([59.94, 30.27], {
+      hintContent: 'Магазин бургеров №4',
+      balloonContent: 'Бургерная 4'
+    }, {
+      iconLayout: 'default#image',
+      iconImageHref: 'img/icons/map-marker.svg',
+      iconImageSize: [40, 52],
+      iconImageOffset: [-5, -38]
+    });
+  myMap.behaviors.disable('scrollZoom');
+  myMap.geoObjects
+    .add(burger1)
+    .add(burger2)
+    .add(burger3)
+    .add(burger4);
+});    
